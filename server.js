@@ -3,7 +3,7 @@ var path = require('path')
 var app = express()
 
 app.engine('html', require('ejs').renderFile)
-app.set("views", path.resolve(__dirname, "views"))
+app.set("views", path.join(__dirname, "views"))
 app.set('view engine', 'html')
 
 app.get('/', function(req, res) {
@@ -46,9 +46,9 @@ app.get('/:times', function(req, res){
 	}
 	res.send(JSON.stringify(results))
 })
-
-app.listen(8080, function() {
-    console.log("Timestamp App listening on port "+ 8080);
+var port = process.env.PORT || 8080; 
+app.listen(port, function() {
+    console.log("Timestamp App listening on port "+ port);
 });
 
 
