@@ -1,5 +1,14 @@
 var express = require('express')
+var path = require('path')
 var app = express()
+
+app.engine('html', require('ejs').renderFile)
+app.set("views", path.resolve(__dirname, "views"))
+app.set('view engine', 'html')
+
+app.get('/', function(req, res) {
+    res.render('index')
+})
 
 function unix2natural(UNIX_timestamp){
   var a = new Date(UNIX_timestamp * 1000);
@@ -37,6 +46,7 @@ app.get('/:times', function(req, res){
 	}
 	res.send(JSON.stringify(results))
 })
+
 app.listen(8080, function() {
     console.log("Timestamp App listening on port "+ 8080);
 });
